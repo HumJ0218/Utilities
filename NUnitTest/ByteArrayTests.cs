@@ -6,8 +6,8 @@ namespace NUnitTest
 {
     public class ByteArrayTests
     {
-        private Random random;
         private int count;
+        private Random random;
 
         [SetUp]
         public void Setup()

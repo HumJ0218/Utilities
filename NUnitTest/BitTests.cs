@@ -8,8 +8,8 @@ namespace NUnitTest
 {
     public class BitTests
     {
-        private Random random;
         private int count;
+        private Random random;
         private Dictionary<int, char> sampleChar;
 
         [SetUp]

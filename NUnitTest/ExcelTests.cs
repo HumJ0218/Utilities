@@ -6,8 +6,8 @@ namespace NUnitTest
 {
     public class ExcelTests
     {
-        private Random random;
         private int count;
+        private Random random;
 
         [SetUp]
         public void Setup()
