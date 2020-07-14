@@ -15,7 +15,7 @@ namespace NUnitTest
         [SetUp]
         public void Setup()
         {
-            count = 1024;
+            count = 256;
 
             random = new Random();
             encoding = Encoding.Default;
