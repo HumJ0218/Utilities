@@ -20,11 +20,11 @@ namespace NUnitTest
         [Test]
         public void ColumnLetter_ColumnNumber()
         {
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var value = random.Next(65536);
+                int value = random.Next(65536);
 
-                var testValue = value.Excel_ConvertToColumnLetter().Excel_ConvertToColumnNumber();
+                int testValue = value.Excel_ConvertToColumnLetter().Excel_ConvertToColumnNumber();
 
                 Assert.AreEqual(value, testValue);
             }

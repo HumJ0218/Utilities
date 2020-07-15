@@ -13,7 +13,7 @@ namespace HumJ.Utilities
         public static string Excel_ConvertToColumnLetter(this int iCol)
         {
             int a, b;
-            var ConvertToLetter = "";
+            string ConvertToLetter = "";
             while (iCol > 0)
             {
                 a = (iCol - 1) / 26;
@@ -38,8 +38,8 @@ namespace HumJ.Utilities
                 throw new ArgumentException("Excel 列号无效", nameof(iCol));
             }
 
-            var i = 0;
-            foreach (var c in iCol)
+            int i = 0;
+            foreach (char c in iCol)
             {
                 i *= 26;
                 i += c - 65 + 1;

@@ -14,7 +14,7 @@ namespace HumJ.Utilities
             byte[] gzBytes;
             using (MemoryStream compressStream = new MemoryStream())
             {
-                using (var zipStream = new GZipStream(compressStream, CompressionMode.Compress))
+                using (GZipStream zipStream = new GZipStream(compressStream, CompressionMode.Compress))
                 {
                     zipStream.Write(bytes, 0, bytes.Length);
                 }
@@ -30,12 +30,12 @@ namespace HumJ.Utilities
         /// </summary>
         public static byte[] GZip_Decompress(this byte[] gzBytes)
         {
-            using var gzms = new MemoryStream(gzBytes);
-            using var decompressedStream = new GZipStream(gzms, CompressionMode.Decompress);
-            using var ms = new MemoryStream();
+            using MemoryStream gzms = new MemoryStream(gzBytes);
+            using GZipStream decompressedStream = new GZipStream(gzms, CompressionMode.Decompress);
+            using MemoryStream ms = new MemoryStream();
             decompressedStream.CopyTo(ms);
 
-            var bytes = ms.ToArray();
+            byte[] bytes = ms.ToArray();
             return bytes;
         }
 

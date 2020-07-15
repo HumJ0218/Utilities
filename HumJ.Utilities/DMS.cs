@@ -10,15 +10,15 @@ namespace HumJ.Utilities
         /// </summary>
         public static double DMS_Convert(this string dms)
         {
-            var minus = Regex.IsMatch(dms, "-(?=\\d)");
-            var numbers = Regex.Matches(dms, "\\d+(\\.\\d+)?");
+            bool minus = Regex.IsMatch(dms, "-(?=\\d)");
+            MatchCollection numbers = Regex.Matches(dms, "\\d+(\\.\\d+)?");
 
-            var d = numbers.Count > 0 ? double.Parse(numbers[0].Value) : 0;
-            var m = numbers.Count > 1 ? double.Parse(numbers[1].Value) : 0;
-            var s = numbers.Count > 2 ? double.Parse(numbers[2].Value) : 0;
+            double d = numbers.Count > 0 ? double.Parse(numbers[0].Value) : 0;
+            double m = numbers.Count > 1 ? double.Parse(numbers[1].Value) : 0;
+            double s = numbers.Count > 2 ? double.Parse(numbers[2].Value) : 0;
 
-            var sign = minus ? -1 : 1;
-            var result = sign * (d + m / 60 + s / 3600);
+            int sign = minus ? -1 : 1;
+            double result = sign * (d + m / 60 + s / 3600);
 
             return result;
         }
@@ -28,16 +28,16 @@ namespace HumJ.Utilities
         /// </summary>
         public static string DMS_Convert(this double dms, string format = "{0}°{1}′{2}″")
         {
-            var minus = dms < 0;
-            var abs = Math.Abs(dms);
+            bool minus = dms < 0;
+            double abs = Math.Abs(dms);
 
-            var d = (int)abs;
+            int d = (int)abs;
             abs = (abs - d) * 60;
-            var m = (int)abs;
+            int m = (int)abs;
             abs = (abs - m) * 60;
-            var s = abs;
+            double s = abs;
 
-            var result = string.Format(format, (minus ? "-" : "") + d, m, s);
+            string result = string.Format(format, (minus ? "-" : "") + d, m, s);
             return result;
         }
     }

@@ -35,10 +35,10 @@ namespace HumJ.Utilities
             }
 
             // 交集数量
-            var intersection = a.Intersect(b).Count();
+            int intersection = a.Intersect(b).Count();
 
             // 并集数量
-            var union = a.Union(b).Count();
+            int union = a.Union(b).Count();
 
             // 相似度
             return (float)intersection / union;
@@ -62,10 +62,10 @@ namespace HumJ.Utilities
             }
 
             // 交集数量
-            var intersection = a.Intersect(b).Count();
+            int intersection = a.Intersect(b).Count();
 
             // 总元素数量
-            var allcount = a.Count() + b.Count();
+            int allcount = a.Count() + b.Count();
 
             // 相似度
             return (float)intersection * 2 / allcount;
@@ -97,19 +97,26 @@ namespace HumJ.Utilities
         /// </summary>
         public static int IEnumerableT_EditDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
-            var aLen = a.Count();
-            var bLen = b.Count();
+            int aLen = a.Count();
+            int bLen = b.Count();
 
-            if (aLen == 0) return aLen;
-            if (bLen == 0) return bLen;
-
-            var aa = a.ToArray();
-            var bb = b.ToArray();
-
-            var v = new int[aLen + 1, bLen + 1];
-            for (var i = 0; i <= aLen; ++i)
+            if (aLen == 0)
             {
-                for (var j = 0; j <= bLen; ++j)
+                return aLen;
+            }
+
+            if (bLen == 0)
+            {
+                return bLen;
+            }
+
+            T[] aa = a.ToArray();
+            T[] bb = b.ToArray();
+
+            int[,] v = new int[aLen + 1, bLen + 1];
+            for (int i = 0; i <= aLen; ++i)
+            {
+                for (int j = 0; j <= bLen; ++j)
                 {
                     if (i == 0)
                     {
@@ -149,8 +156,8 @@ namespace HumJ.Utilities
                 return 0;
             }
 
-            var aa = a.ToArray();
-            var bb = b.ToArray();
+            T[] aa = a.ToArray();
+            T[] bb = b.ToArray();
 
             // 长度不一致，相似度为 0
             if (aa.Length != bb.Length)
@@ -158,7 +165,7 @@ namespace HumJ.Utilities
                 return 0;
             }
 
-            var differenceCount = 0f;
+            float differenceCount = 0f;
             for (int i = 0; i < aa.Length; i++)
             {
                 if (aa[i].Equals(bb[i]))
@@ -188,19 +195,19 @@ namespace HumJ.Utilities
             }
 
             // 向量化
-            var union = a.Union(b);
-            var vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
-            var vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
+            IEnumerable<T> union = a.Union(b);
+            Dictionary<T, int> vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
+            Dictionary<T, int> vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
 
             // 内积
-            var innerProduct = union.Sum(d => vectorA[d] * vectorB[d]);
+            int innerProduct = union.Sum(d => vectorA[d] * vectorB[d]);
 
             // 向量模长
-            var moldA = Math.Sqrt(vectorA.Values.Sum(d => d * d));
-            var moldB = Math.Sqrt(vectorB.Values.Sum(d => d * d));
+            double moldA = Math.Sqrt(vectorA.Values.Sum(d => d * d));
+            double moldB = Math.Sqrt(vectorB.Values.Sum(d => d * d));
 
             // 夹角余弦值
-            var cosine = innerProduct / (moldA * moldB);
+            double cosine = innerProduct / (moldA * moldB);
 
             return (float)cosine;
         }
@@ -225,18 +232,18 @@ namespace HumJ.Utilities
             }
 
             // 向量化
-            var union = a.Union(b);
-            var vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
-            var vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
+            IEnumerable<T> union = a.Union(b);
+            Dictionary<T, int> vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
+            Dictionary<T, int> vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
 
             // 差向量
-            var difference = union.ToDictionary(d => d, d => vectorA[d] - vectorB[d]);
+            Dictionary<T, int> difference = union.ToDictionary(d => d, d => vectorA[d] - vectorB[d]);
 
             // 向量模长
-            var mold = Math.Sqrt(difference.Values.Sum(d => d * d));
+            double mold = Math.Sqrt(difference.Values.Sum(d => d * d));
 
             // 距离指数
-            var distance = 1d / (mold + 1);
+            double distance = 1d / (mold + 1);
             return (float)distance;
         }
 
@@ -260,18 +267,18 @@ namespace HumJ.Utilities
             }
 
             // 向量化
-            var union = a.Union(b);
-            var vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
-            var vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
+            IEnumerable<T> union = a.Union(b);
+            Dictionary<T, int> vectorA = union.ToDictionary(d => d, d => a.Count(c => c.Equals(d)));
+            Dictionary<T, int> vectorB = union.ToDictionary(d => d, d => b.Count(c => c.Equals(d)));
 
             // 差向量
-            var difference = union.ToDictionary(d => d, d => vectorA[d] - vectorB[d]);
+            Dictionary<T, int> difference = union.ToDictionary(d => d, d => vectorA[d] - vectorB[d]);
 
             // 维度和
-            var sum = union.Sum(d => difference[d]);
+            int sum = union.Sum(d => difference[d]);
 
             // 距离指数
-            var distance = 1d / (sum + 1);
+            double distance = 1d / (sum + 1);
             return (float)distance;
         }
     }

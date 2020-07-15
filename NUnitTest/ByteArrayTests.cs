@@ -20,13 +20,13 @@ namespace NUnitTest
         [Test]
         public void ToHexString()
         {
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var bytes = new byte[random.Next(65536)];
+                byte[] bytes = new byte[random.Next(65536)];
                 random.NextBytes(bytes);
 
-                var ba = bytes.ByteArray_ToHexString("-");
-                var bas = BitConverter.ToString(bytes);
+                string ba = bytes.ByteArray_ToHexString("-");
+                string bas = BitConverter.ToString(bytes);
 
                 Assert.AreEqual(ba, bas);
             }

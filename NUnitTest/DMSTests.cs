@@ -20,14 +20,14 @@ namespace NUnitTest
         [Test]
         public void Convert()
         {
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var value = (random.NextDouble() - 0.5) * 180;
-                var str = value.DMS_Convert();
-                var testValue = str.DMS_Convert();
+                double value = (random.NextDouble() - 0.5) * 180;
+                string str = value.DMS_Convert();
+                double testValue = str.DMS_Convert();
 
-                var diff = Math.Abs(testValue - value);
-                var threshold = 1.0 / 3600 / 1000000;
+                double diff = Math.Abs(testValue - value);
+                double threshold = 1.0 / 3600 / 1000000;
 
                 Assert.LessOrEqual(diff, threshold);
             }

@@ -5,7 +5,7 @@
         /// <summary>
         /// 倒转 Byte 的高低位
         /// </summary>
-        public static unsafe byte Bit_Reverse(this byte n)
+        public static byte Bit_Reverse(this byte n)
         {
             n = (byte)(((n & 0b11110000) >> 4) | ((n & 0b00001111) << 4));
             n = (byte)(((n & 0b11001100) >> 2) | ((n & 0b00110011) << 2));
@@ -16,7 +16,7 @@
         /// <summary>
         /// 倒转 UInt16 的高低位
         /// </summary>
-        public static unsafe ushort Bit_Reverse(this ushort n)
+        public static ushort Bit_Reverse(this ushort n)
         {
             n = (ushort)(((n & 0b1111111100000000) >> 8) | ((n & 0b0000000011111111) << 8));
             n = (ushort)(((n & 0b1111000011110000) >> 4) | ((n & 0b0000111100001111) << 4));
@@ -28,7 +28,7 @@
         /// <summary>
         /// 倒转 UInt32 的高低位
         /// </summary>
-        public static unsafe uint Bit_Reverse(this uint n)
+        public static uint Bit_Reverse(this uint n)
         {
             n = ((n & 0b11111111111111110000000000000000) >> 16) | ((n & 0b00000000000000001111111111111111) << 16);
             n = ((n & 0b11111111000000001111111100000000) >> 08) | ((n & 0b00000000111111110000000011111111) << 08);
@@ -41,7 +41,7 @@
         /// <summary>
         /// 倒转 UInt64 的高低位
         /// </summary>
-        public static unsafe ulong Bit_Reverse(this ulong n)
+        public static ulong Bit_Reverse(this ulong n)
         {
             n = ((n & 0b1111111111111111111111111111111100000000000000000000000000000000) >> 32) | ((n & 0b0000000000000000000000000000000011111111111111111111111111111111) << 32);
             n = ((n & 0b1111111111111111000000000000000011111111111111110000000000000000) >> 16) | ((n & 0b0000000000000000111111111111111100000000000000001111111111111111) << 16);
