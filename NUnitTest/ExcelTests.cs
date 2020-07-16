@@ -24,7 +24,7 @@ namespace NUnitTest
             {
                 int value = random.Next(65536);
 
-                int testValue = value.Excel_ConvertToColumnLetter().Excel_ConvertToColumnNumber();
+                int testValue = value.ConvertToExcelColumnLetter().ConvertToExcelColumnNumber();
 
                 Assert.AreEqual(value, testValue);
             }

@@ -10,7 +10,7 @@ namespace HumJ.Utilities
         /// </summary>
         /// <param name="iCol">列号，1起始</param>
         /// <seealso cref="https://docs.microsoft.com/en-us/office/troubleshoot/excel/convert-excel-column-numbers"/>
-        public static string Excel_ConvertToColumnLetter(this int iCol)
+        public static string ConvertToExcelColumnLetter(this int iCol)
         {
             int a, b;
             string ConvertToLetter = "";
@@ -29,7 +29,7 @@ namespace HumJ.Utilities
         /// Excel 列号字母转数字（1 起始）
         /// </summary>
         /// <param name="iCol">列号，A起始</param>
-        public static int Excel_ConvertToColumnNumber(this string iCol)
+        public static int ConvertToExcelColumnNumber(this string iCol)
         {
             iCol = iCol.ToUpper();
 

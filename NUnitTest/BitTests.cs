@@ -32,7 +32,7 @@ namespace NUnitTest
                 string sampleReverse = string.Join("", sample.Reverse());
                 byte sampleReverseValue = Convert.ToByte(sampleReverse, 2);
 
-                Assert.AreEqual(sampleValue.Bit_Reverse(), sampleReverseValue);
+                Assert.AreEqual(sampleValue.BitReverse(), sampleReverseValue);
             }
 
             for (int i = 0; i < count; i++)
@@ -43,7 +43,7 @@ namespace NUnitTest
                 string sampleReverse = string.Join("", sample.Reverse());
                 ushort sampleReverseValue = Convert.ToUInt16(sampleReverse, 2);
 
-                Assert.AreEqual(sampleValue.Bit_Reverse(), sampleReverseValue);
+                Assert.AreEqual(sampleValue.BitReverse(), sampleReverseValue);
             }
 
             for (int i = 0; i < count; i++)
@@ -54,7 +54,7 @@ namespace NUnitTest
                 string sampleReverse = string.Join("", sample.Reverse());
                 uint sampleReverseValue = Convert.ToUInt32(sampleReverse, 2);
 
-                Assert.AreEqual(sampleValue.Bit_Reverse(), sampleReverseValue);
+                Assert.AreEqual(sampleValue.BitReverse(), sampleReverseValue);
             }
 
             for (int i = 0; i < count; i++)
@@ -65,7 +65,7 @@ namespace NUnitTest
                 string sampleReverse = string.Join("", sample.Reverse());
                 ulong sampleReverseValue = Convert.ToUInt64(sampleReverse, 2);
 
-                Assert.AreEqual(sampleValue.Bit_Reverse(), sampleReverseValue);
+                Assert.AreEqual(sampleValue.BitReverse(), sampleReverseValue);
             }
         }
     }

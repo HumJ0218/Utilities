@@ -29,7 +29,7 @@ namespace NUnitTest
                 byte[] bytes = new byte[random.Next(65536)];
                 random.NextBytes(bytes);
 
-                byte[] testValue = bytes.GZip_Compress().GZip_Decompress();
+                byte[] testValue = bytes.GZipCompress().GZipDecompress();
 
                 Assert.AreEqual(bytes, testValue);
             }
@@ -42,11 +42,11 @@ namespace NUnitTest
             {
 
                 string str1 = string.Join("", Enumerable.Range(0, random.Next(65536)).Select(m => (char)(32 + random.Next(32767 - 32))));
-                string testValue1 = str1.GZip_CompressFromString().GZip_DecompressToString();
+                string testValue1 = str1.GZipCompressFromString().GZipDecompressToString();
                 Assert.AreEqual(str1, testValue1);
 
                 string str2 = string.Join("", Enumerable.Range(0, random.Next(65536)).Select(m => (char)(32 + random.Next(32767 - 32))));
-                string testValue2 = str2.GZip_CompressFromString(encoding).GZip_DecompressToString(encoding);
+                string testValue2 = str2.GZipCompressFromString(encoding).GZipDecompressToString(encoding);
                 Assert.AreEqual(str2, testValue2);
             }
         }

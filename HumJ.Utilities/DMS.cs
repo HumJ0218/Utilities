@@ -8,7 +8,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 字符串格式的度分秒转换为浮点数格式的角度
         /// </summary>
-        public static double DMS_Convert(this string dms)
+        public static double ConvertDmsToDeg(this string dms)
         {
             bool minus = Regex.IsMatch(dms, "-(?=\\d)");
             MatchCollection numbers = Regex.Matches(dms, "\\d+(\\.\\d+)?");
@@ -26,10 +26,10 @@ namespace HumJ.Utilities
         /// <summary>
         /// 浮点数格式的角度转换为字符串格式的度分秒
         /// </summary>
-        public static string DMS_Convert(this double dms, string format = "{0}°{1}′{2}″")
+        public static string ConvertDegToDms(this double deg, string format = "{0}°{1}′{2}″")
         {
-            bool minus = dms < 0;
-            double abs = Math.Abs(dms);
+            bool minus = deg < 0;
+            double abs = Math.Abs(deg);
 
             int d = (int)abs;
             abs = (abs - d) * 60;

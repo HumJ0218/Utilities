@@ -23,8 +23,8 @@ namespace NUnitTest
             for (int i = 0; i < count; i++)
             {
                 double value = (random.NextDouble() - 0.5) * 180;
-                string str = value.DMS_Convert();
-                double testValue = str.DMS_Convert();
+                string str = value.ConvertDegToDms();
+                double testValue = str.ConvertDmsToDeg();
 
                 double diff = Math.Abs(testValue - value);
                 double threshold = 1.0 / 3600 / 1000000;

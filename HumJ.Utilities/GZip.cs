@@ -9,7 +9,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 使用 GZip 压缩字节数组
         /// </summary>
-        public static byte[] GZip_Compress(this byte[] bytes)
+        public static byte[] GZipCompress(this byte[] bytes)
         {
             byte[] gzBytes;
             using (MemoryStream compressStream = new MemoryStream())
@@ -28,7 +28,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 使用 GZip 解压缩字节数组
         /// </summary>
-        public static byte[] GZip_Decompress(this byte[] gzBytes)
+        public static byte[] GZipDecompress(this byte[] gzBytes)
         {
             using MemoryStream gzms = new MemoryStream(gzBytes);
             using GZipStream decompressedStream = new GZipStream(gzms, CompressionMode.Decompress);
@@ -42,33 +42,33 @@ namespace HumJ.Utilities
         /// <summary>
         /// 使用 GZip 压缩字符串（UTF-8 编码）
         /// </summary>
-        public static byte[] GZip_CompressFromString(this string str)
+        public static byte[] GZipCompressFromString(this string str)
         {
-            return str.GZip_CompressFromString(Encoding.UTF8);
+            return str.GZipCompressFromString(Encoding.UTF8);
         }
 
         /// <summary>
         /// 使用 GZip 压缩字符串（自定义编码）
         /// </summary>
-        public static byte[] GZip_CompressFromString(this string str, Encoding encoding)
+        public static byte[] GZipCompressFromString(this string str, Encoding encoding)
         {
-            return encoding.GetBytes(str).GZip_Compress();
+            return encoding.GetBytes(str).GZipCompress();
         }
 
         /// <summary>
         /// 使用 GZip 解压缩字符串（UTF-8 编码）
         /// </summary>
-        public static string GZip_DecompressToString(this byte[] gzBytes)
+        public static string GZipDecompressToString(this byte[] gzBytes)
         {
-            return gzBytes.GZip_DecompressToString(Encoding.UTF8);
+            return gzBytes.GZipDecompressToString(Encoding.UTF8);
         }
 
         /// <summary>
         /// 使用 GZip 解压缩字符串（自定义编码）
         /// </summary>
-        public static string GZip_DecompressToString(this byte[] gzBytes, Encoding encoding)
+        public static string GZipDecompressToString(this byte[] gzBytes, Encoding encoding)
         {
-            return encoding.GetString(gzBytes.GZip_Decompress());
+            return encoding.GetString(gzBytes.GZipDecompress());
         }
     }
 }

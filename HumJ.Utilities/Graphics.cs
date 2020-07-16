@@ -8,7 +8,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 计算矩形旋转任意角度后的宽高
         /// </summary>
-        public static (double width, double height) Graphics_GetRotateRectangle(this (double width, double height) shape, double deg)
+        public static (double width, double height) GetRotateRectangle(this (double width, double height) shape, double deg)
         {
             double width = shape.width;
             double height = shape.height;
@@ -25,14 +25,14 @@ namespace HumJ.Utilities
         /// <summary>
         /// 获取旋转任意角度后的图像
         /// </summary>
-        public static Image Graphics_Rotate(this Image srcImage, double deg, double antiAlias = 2)
+        public static Image GetRotateImage(this Image srcImage, double deg, double antiAlias = 2)
         {
             deg %= 360;
 
             double srcWidth = srcImage.Width * antiAlias;
             double srcHeight = srcImage.Height * antiAlias;
 
-            (double width, double height) = (srcWidth, srcHeight).Graphics_GetRotateRectangle(deg);
+            (double width, double height) = (srcWidth, srcHeight).GetRotateRectangle(deg);
             double rotateWidth = width;
             double rotateHeight = height;
 

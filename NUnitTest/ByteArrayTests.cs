@@ -25,7 +25,7 @@ namespace NUnitTest
                 byte[] bytes = new byte[random.Next(65536)];
                 random.NextBytes(bytes);
 
-                string ba = bytes.ByteArray_ToHexString("-");
+                string ba = bytes.ToHexString("-");
                 string bas = BitConverter.ToString(bytes);
 
                 Assert.AreEqual(ba, bas);

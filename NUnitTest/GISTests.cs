@@ -14,7 +14,7 @@ namespace NUnitTest
         public void ToHexString()
         {
             (double, double) wgs = (39.907333, 116.391083);
-            Assert.AreEqual((215825, 99330), GIS.GIS_GetTileXY(wgs, 18));
+            Assert.AreEqual((215825, 99330), GIS.GetGisTileXY(wgs, 18));
         }
     }
 }

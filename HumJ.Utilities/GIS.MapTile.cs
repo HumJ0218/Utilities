@@ -4,7 +4,7 @@ namespace HumJ.Utilities
 {
     public static partial class GIS
     {
-        public static (int x, int y) GIS_GetTileXY(this (double lat, double lon) point, int z)
+        public static (int x, int y) GetGisTileXY(this (double lat, double lon) point, int z)
         {
             double lat = point.lat;
             double lon = point.lon;

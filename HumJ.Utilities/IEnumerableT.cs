@@ -12,7 +12,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 返回集合是否为空或空集合
         /// </summary>
-        public static bool IEnumerableT_IsNullOrEmpty<T>(this IEnumerable<T> a)
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> a)
         {
             return a == null || a.Count() == 0;
         }
@@ -20,16 +20,16 @@ namespace HumJ.Utilities
         /// <summary>
         /// 计算与另一集合之间的 Jaccard 相似度（集合的交集数量与并集数量的比值）
         /// </summary>
-        public static float IEnumerableT_Jaccard<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float Jaccard<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
@@ -47,16 +47,16 @@ namespace HumJ.Utilities
         /// <summary>
         /// 计算与另一集合之间的 Sorensen Dice 相似度（集合的交集数量的 2 倍与总元素数量的比值）
         /// </summary>
-        public static float IEnumerableT_SorensenDice<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float SorensenDice<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
@@ -74,28 +74,28 @@ namespace HumJ.Utilities
         /// <summary>
         /// 计算与另一集合之间的 Levenshtein 相似度（1 与编辑距离与较大集合元素数的比值的差）
         /// </summary>
-        public static float IEnumerableT_Levenshtein<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float Levenshtein<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
 
             // 相似度
-            return 1 - (float)IEnumerableT_EditDistance(a, b) / Math.Max(a.Count(), b.Count());
+            return 1 - (float)EditDistance(a, b) / Math.Max(a.Count(), b.Count());
         }
 
         /// <summary>
         /// 计算与另一集合之间的编辑距离（由一个集合变为另一个集合的最小操作次数）
         /// </summary>
-        public static int IEnumerableT_EditDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static int EditDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             int aLen = a.Count();
             int bLen = b.Count();
@@ -142,16 +142,16 @@ namespace HumJ.Utilities
         /// <summary>
         /// 计算与另一集合之间的 Hamming 相似度（等元素数集合中不一致的元素个数的占比）
         /// </summary>
-        public static float IEnumerableT_Hamming<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float Hamming<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
@@ -180,16 +180,16 @@ namespace HumJ.Utilities
         /// 计算与另一集合之间的余弦相似度（向量夹角的余弦值）<br/>
         /// 化为向量的规则是，将并集作为向量空间，每一个元素作为一个维度，维度的数值为对应元素出现的频率
         /// </summary>
-        public static float IEnumerableT_Cosine<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float Cosine<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
@@ -217,16 +217,16 @@ namespace HumJ.Utilities
         /// 化为向量的规则是，将并集作为向量空间，每一个元素作为一个维度，维度的数值为对应元素出现的频率<br/>
         /// 距离指数 = 1 / (距离 + 1)
         /// </summary>
-        public static float IEnumerableT_EuclideanDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float EuclideanDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }
@@ -252,16 +252,16 @@ namespace HumJ.Utilities
         /// 化为向量的规则是，将并集作为向量空间，每一个元素作为一个维度，维度的数值为对应元素出现的频率<br/>
         /// 距离指数 = 1 / (距离 + 1)
         /// </summary>
-        public static float IEnumerableT_ManhattanDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        public static float ManhattanDistance<T>(this IEnumerable<T> a, IEnumerable<T> b)
         {
             // 都为空，相似度为 1
-            if (a.IEnumerableT_IsNullOrEmpty() && b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() && b.IsNullOrEmpty())
             {
                 return 1;
             }
 
             // 一个空一个非空，相似度为 0
-            if (a.IEnumerableT_IsNullOrEmpty() || b.IEnumerableT_IsNullOrEmpty())
+            if (a.IsNullOrEmpty() || b.IsNullOrEmpty())
             {
                 return 0;
             }

@@ -4,49 +4,49 @@
 --------
 
 # 位运算
-- `byte.Bit_Reverse` 高低位倒转
-- `ushort.Bit_Reverse` 高低位倒转
-- `uint.Bit_Reverse` 高低位倒转
-- `ulong.Bit_Reverse` 高低位倒转
+- `byte.BitReverse` 高低位倒转
+- `ushort.BitReverse` 高低位倒转
+- `uint.BitReverse` 高低位倒转
+- `ulong.BitReverse` 高低位倒转
 
 # 字节数组
-- `byte[].ByteArray_ToHexString` 字节数组转字符串
+- `byte[].ToHexString` 字节数组转字符串
 
 # 度分秒
-- `string.DMS_Convert` 度分秒字符串转小数角度
-- `double.DMS_Convert` 小数角度转度分秒字符串
+- `string.ConvertDmsToDeg` 度分秒字符串转小数角度
+- `double.ConvertDegToDms` 小数角度转度分秒字符串
 
 # Excel
-- `int.Excel_ConvertToColumnLetter` 列序号数字转字符串
-- `string.Excel_ConvertToColumnNumber` 列序号字符串转数字
+- `int.ConvertToExcelColumnLetter` 列序号数字转字符串
+- `string.ConvertToExcelColumnNumber` 列序号字符串转数字
 
 # GIS
 - …… 坐标系变换 从略
-- `(double, double).GIS_GetTileXY` 获取指定经纬度对应的地图瓦片序号
+- `(double, double).GetGisTileXY` 获取指定经纬度对应的地图瓦片序号
 
 # 图形
-- `(double, double).Graphics_GetRotateRectangle` 计算矩形旋转任意角度后的宽高
-- `Image.Graphics_Rotate` 获取旋转任意角度后的图像
+- `(double, double).GetRotateRectangle` 计算矩形旋转任意角度后的宽高
+- `Image.GetRotateImage` 获取旋转任意角度后的图像
 
 # GZip
-- `byte[].GZip_Compress` 使用 GZip 压缩字节数组
-- `byte[].GZip_Decompress` 使用 GZip 解压缩字节数组
-- `string.GZip_CompressFromString` 使用 GZip 压缩字符串
-- `byte[].GZip_DecompressToString` 使用 GZip 解压缩字符串
+- `byte[].GZipCompress` 使用 GZip 压缩字节数组
+- `byte[].GZipDecompress` 使用 GZip 解压缩字节数组
+- `string.GZipCompressFromString` 使用 GZip 压缩字符串
+- `byte[].GZipDecompressToString` 使用 GZip 解压缩字符串
 
 # 集合
-- `IEnumerable<T>.IEnumerableT_IsNullOrEmpty` 返回集合是否为空或空集合
-- `IEnumerable<T>.IEnumerableT_Jaccard` 计算与另一集合之间的 Jaccard 相似度
-- `IEnumerable<T>.IEnumerableT_SorensenDice` 计算与另一集合之间的 Sorensen Dice 相似度
-- `IEnumerable<T>.IEnumerableT_Levenshtein` 计算与另一集合之间的 Levenshtein 相似度
-- `IEnumerable<T>.IEnumerableT_EditDistance` 计算与另一集合之间的编辑距离
-- `IEnumerable<T>.IEnumerableT_Hamming` 计算与另一集合之间的 Hamming 相似度
-- `IEnumerable<T>.IEnumerableT_Cosine` 计算与另一集合之间的余弦相似度
-- `IEnumerable<T>.IEnumerableT_EuclideanDistance` 计算与另一集合之间的欧几里得距离指数
-- `IEnumerable<T>.IEnumerableT_ManhattanDistance` 计算与另一集合之间的曼哈顿距离指数
+- `IEnumerable<T>.IsNullOrEmpty` 返回集合是否为空或空集合
+- `IEnumerable<T>.Jaccard` 计算与另一集合之间的 Jaccard 相似度
+- `IEnumerable<T>.SorensenDice` 计算与另一集合之间的 Sorensen Dice 相似度
+- `IEnumerable<T>.Levenshtein` 计算与另一集合之间的 Levenshtein 相似度
+- `IEnumerable<T>.EditDistance` 计算与另一集合之间的编辑距离
+- `IEnumerable<T>.Hamming` 计算与另一集合之间的 Hamming 相似度
+- `IEnumerable<T>.Cosine` 计算与另一集合之间的余弦相似度
+- `IEnumerable<T>.EuclideanDistance` 计算与另一集合之间的欧几里得距离指数
+- `IEnumerable<T>.ManhattanDistance` 计算与另一集合之间的曼哈顿距离指数
 
 # MD5
-- `byte[].MD5_ComputeHash` 计算字节数组的 MD5
-- `Stream.MD5_ComputeHash` 计算字节流的 MD5
-- `string.MD5_ComputeHash` 计算字符串的 MD5
-- `FileInfo.MD5_ComputeHash` 计算文件的 MD5
+- `byte[].GetMD5Hash` 计算字节数组的 MD5
+- `Stream.GetMD5Hash` 计算字节流的 MD5
+- `string.GetMD5Hash` 计算字符串的 MD5
+- `FileInfo.GetMD5Hash` 计算文件的 MD5
