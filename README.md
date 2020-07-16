@@ -24,6 +24,10 @@
 - …… 坐标系变换 从略
 - `(double, double).GIS_GetTileXY` 获取指定经纬度对应的地图瓦片序号
 
+# 图形
+- `(double, double).Graphics_GetRotateRectangle` 计算矩形旋转任意角度后的宽高
+- `Image.Graphics_Rotate` 获取旋转任意角度后的图像
+
 # GZip
 - `byte[].GZip_Compress` 使用 GZip 压缩字节数组
 - `byte[].GZip_Decompress` 使用 GZip 解压缩字节数组

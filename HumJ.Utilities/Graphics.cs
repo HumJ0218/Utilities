@@ -25,7 +25,7 @@ namespace HumJ.Utilities
         /// <summary>
         /// 获取旋转任意角度后的图像
         /// </summary>
-        public static Image Graphics_GetRotateImage(this Image srcImage, double deg, double antiAlias = 2)
+        public static Image Graphics_Rotate(this Image srcImage, double deg, double antiAlias = 2)
         {
             deg %= 360;
 
