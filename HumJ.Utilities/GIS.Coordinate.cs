@@ -124,11 +124,17 @@ namespace HumJ.Utilities
             return _coord_diff(gcj, _coord_diff(wgs_gcj(gcj, checkChina), gcj));
         }
 
-        public static (double lat, double lon) gcj_bd((double lat, double lon) gcj) => gcj_bd_d(gcj);
+        public static (double lat, double lon) gcj_bd((double lat, double lon) gcj)
+        {
+            return gcj_bd_d(gcj);
+        }
 
         // Yes, we can implement a "precise" one too.
         // accuracy ~1e-7 deg (decimeter-level; exceeds usual data accuracy)
-        public static (double lat, double lon) bd_gcj((double lat, double lon) bd) => bd_gcj_d(bd);
+        public static (double lat, double lon) bd_gcj((double lat, double lon) bd)
+        {
+            return bd_gcj_d(bd);
+        }
 
         public static (double lat, double lon) bd_wgs((double lat, double lon) bd, bool checkChina = true)
         {

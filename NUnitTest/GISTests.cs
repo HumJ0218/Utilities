@@ -5,7 +5,6 @@ namespace NUnitTest
 {
     public class GISTests
     {
-
         [SetUp]
         public void Setup()
         {
@@ -14,7 +13,7 @@ namespace NUnitTest
         [Test]
         public void ToHexString()
         {
-            var wgs = (39.907333, 116.391083);
+            (double, double) wgs = (39.907333, 116.391083);
             Assert.AreEqual((215825, 99330), GIS.GIS_GetTileXY(wgs, 18));
         }
     }
