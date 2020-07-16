@@ -19,24 +19,24 @@
 - `string.DMS_Convert` 度分秒字符串转小数角度
 - `double.DMS_Convert` 小数角度转度分秒字符串
 
-# Excel 相关
+# Excel
 
 - `int.Excel_ConvertToColumnLetter` 列序号数字转字符串
 - `string.Excel_ConvertToColumnNumber` 列序号字符串转数字
 
-# GIS 相关
+# GIS
 
 - …… 坐标系变换 从略
 - `(double, double).GIS_GetTileXY` 获取指定经纬度对应的地图瓦片序号
 
-# GZip 相关
+# GZip
 
 - `byte[].GZip_Compress` 使用 GZip 压缩字节数组
 - `byte[].GZip_Decompress` 使用 GZip 解压缩字节数组
 - `string.GZip_CompressFromString` 使用 GZip 压缩字符串
 - `byte[].GZip_DecompressToString` 使用 GZip 解压缩字符串
 
-# 集合相关
+# 集合
 
 - `IEnumerable<T>.IEnumerableT_IsNullOrEmpty` 返回集合是否为空或空集合
 - `IEnumerable<T>.IEnumerableT_Jaccard` 计算与另一集合之间的 Jaccard 相似度
@@ -48,7 +48,7 @@
 - `IEnumerable<T>.IEnumerableT_EuclideanDistance` 计算与另一集合之间的欧几里得距离指数
 - `IEnumerable<T>.IEnumerableT_ManhattanDistance` 计算与另一集合之间的曼哈顿距离指数
 
-# MD5 相关
+# MD5
 
 - `byte[].MD5_ComputeHash` 计算字节数组的 MD5
 - `Stream.MD5_ComputeHash` 计算字节流的 MD5
