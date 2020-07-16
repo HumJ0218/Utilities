@@ -24,6 +24,11 @@
 - `int.Excel_ConvertToColumnLetter` 列序号数字转字符串
 - `string.Excel_ConvertToColumnNumber` 列序号字符串转数字
 
+# GIS 相关
+
+- …… 坐标系变换 从略
+- `(double, double).GIS_GetTileXY` 获取指定经纬度对应的地图瓦片序号
+
 # GZip 相关
 
 - `byte[].GZip_Compress` 使用 GZip 压缩字节数组

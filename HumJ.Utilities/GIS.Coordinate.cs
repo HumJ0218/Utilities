@@ -43,7 +43,7 @@ using System;
 
 namespace HumJ.Utilities
 {
-    public static class GIS
+    public static partial class GIS
     {
         /// Krasovsky 1940 ellipsoid
         /// @const
