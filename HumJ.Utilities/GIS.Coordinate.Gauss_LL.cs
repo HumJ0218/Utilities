@@ -10,12 +10,11 @@ namespace HumJ.Utilities
         /// <summary>
         /// 高斯投影转经纬度
         /// </summary>
-        public static (double lat, double lon) Gauss_LL((double x, double y) gauss, Coordinate coordinate)
+        public static (double lat, double lon) Gauss_LL((double x, double y) gauss, Coordinate coordinate, int zoneWide = 6)
         {
             (double x, double y) = (gauss.x, gauss.y);
 
             int ProjNo;
-            int ZoneWide; // 带宽 
             double longitude1, latitude1, longitude0, X0, Y0, xval, yval;
             double e1, e2, f, a, ee, NN, T, C, M, D, R, u, fai, iPI = Math.PI / 180.0;
 
@@ -43,13 +42,8 @@ namespace HumJ.Utilities
                     }
             }
 
-            // a=6378137.0; f=1/298.257223563; // WGS84
-            // a = 6378245.0; f = 1.0/298.3; // 54年北京坐标系参数 
-            // a=6378140.0; f=1/298.257; // 80年西安坐标系参数 
-
-            ZoneWide = 6; // 6度带宽 
             ProjNo = (int)(x / 1000000L); // 查找带号
-            longitude0 = (ProjNo - 1) * ZoneWide + ZoneWide / 2;
+            longitude0 = (ProjNo - 1) * zoneWide + zoneWide / 2;
             longitude0 *= iPI; // 中央经线
             X0 = ProjNo * 1000000L + 500000L;
             Y0 = 0;
@@ -81,17 +75,14 @@ namespace HumJ.Utilities
         /// <summary>
         /// 经纬度转高斯投影
         /// </summary>
-        public static (double x, double y) LL_Gauss((double lat, double lon) ll, Coordinate coordinate)
+        public static (double x, double y) LL_Gauss((double lat, double lon) ll, Coordinate coordinate, int zoneWide = 6)
         {
             (double lat, double lon) = (ll.lat, ll.lon);
 
-            int ZoneWide; // 带宽 
             double longitude1, latitude1, longitude0, X0, Y0, xval, yval;
-            double a, f, e2, ee, NN, T, C, A, M, iPI;
+            double a, f, e2, ee, NN, T, C, A, M, iPI = Math.PI / 180.0;
 
-            iPI = 0.0174532925199433; // 3.1415926535898/180.0; 
-
-            ZoneWide = 6; // 6度带宽 
+            zoneWide = 6; // 6度带宽 
 
             switch (coordinate)
             {
@@ -116,10 +107,9 @@ namespace HumJ.Utilities
                     }
             }
 
-            int ProjNo = (int)(lon / ZoneWide);
+            int ProjNo = (int)(lon / zoneWide);
 
-            // longitude0 = 0;
-            longitude0 = ProjNo * ZoneWide + ZoneWide / 2; // 中央子午线
+            longitude0 = ProjNo * zoneWide + zoneWide / 2; // 中央子午线
 
             longitude0 *= iPI;                   // 中央子午线转换为弧度
 
@@ -139,7 +129,7 @@ namespace HumJ.Utilities
 
             // 这里要对带分界进行特殊处理（如114度）
 
-            if (lon == ZoneWide * ProjNo)
+            if (lon == zoneWide * ProjNo)
             {
                 X0 = 1000000L * (ProjNo) + 500000L;
 
