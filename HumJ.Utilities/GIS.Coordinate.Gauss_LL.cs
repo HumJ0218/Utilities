@@ -82,8 +82,6 @@ namespace HumJ.Utilities
             double longitude1, latitude1, longitude0, X0, Y0, xval, yval;
             double a, f, e2, ee, NN, T, C, A, M, iPI = Math.PI / 180.0;
 
-            zoneWide = 6; // 6度带宽 
-
             switch (coordinate)
             {
                 case Coordinate.BJ54:
