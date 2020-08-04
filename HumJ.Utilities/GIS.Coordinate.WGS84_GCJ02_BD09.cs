@@ -66,7 +66,7 @@ namespace HumJ.Utilities
 
         /// Distance for haversine method; suitable over short distances like
         /// conversion deviation checking
-        public static double distance((double lat, double lon) a, (double lat, double lon) b)
+        public static double Distance((double lat, double lon) a, (double lat, double lon) b)
         {
             Func<double, double> hav = new Func<double, double>((double θ) =>
             {
@@ -83,7 +83,7 @@ namespace HumJ.Utilities
             ));
         }
 
-        public static (double lat, double lon) wgs_gcj((double lat, double lon) wgs, bool checkChina = true)
+        public static (double lat, double lon) WGS84_GCJ02((double lat, double lon) wgs, bool checkChina = true)
         {
             if (checkChina && !sanity_in_china_p(wgs))
             {
@@ -119,31 +119,31 @@ namespace HumJ.Utilities
         }
 
         // rev_transform_rough; accuracy ~2e-6 deg (meter-level)
-        public static (double lat, double lon) gcj_wgs((double lat, double lon) gcj, bool checkChina = true)
+        public static (double lat, double lon) GCJ02_WGS84((double lat, double lon) gcj, bool checkChina = true)
         {
-            return _coord_diff(gcj, _coord_diff(wgs_gcj(gcj, checkChina), gcj));
+            return _coord_diff(gcj, _coord_diff(WGS84_GCJ02(gcj, checkChina), gcj));
         }
 
-        public static (double lat, double lon) gcj_bd((double lat, double lon) gcj)
+        public static (double lat, double lon) GCJ02_BD09((double lat, double lon) gcj)
         {
             return gcj_bd_d(gcj);
         }
 
         // Yes, we can implement a "precise" one too.
         // accuracy ~1e-7 deg (decimeter-level; exceeds usual data accuracy)
-        public static (double lat, double lon) bd_gcj((double lat, double lon) bd)
+        public static (double lat, double lon) BD09_GCJ02((double lat, double lon) bd)
         {
             return bd_gcj_d(bd);
         }
 
-        public static (double lat, double lon) bd_wgs((double lat, double lon) bd, bool checkChina = true)
+        public static (double lat, double lon) BD09_WGS84((double lat, double lon) bd, bool checkChina = true)
         {
-            return gcj_wgs(bd_gcj(bd), checkChina);
+            return GCJ02_WGS84(BD09_GCJ02(bd), checkChina);
         }
 
-        public static (double lat, double lon) wgs_bd((double lat, double lon) bd, bool checkChina = true)
+        public static (double lat, double lon) WGS84_BD09((double lat, double lon) bd, bool checkChina = true)
         {
-            return gcj_bd(wgs_gcj(bd, checkChina));
+            return GCJ02_BD09(WGS84_GCJ02(bd, checkChina));
         }
 
         // generic "bored function" factory, Caijun 2014
@@ -174,9 +174,9 @@ namespace HumJ.Utilities
         // original GCJ implementation contains noise from a linear-modulo PRNG,
         // and Baidu seems to do similar things with their API too.
 
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> gcj_wgs_bored = __bored__(wgs_gcj, gcj_wgs);
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> bd_gcj_bored = __bored__(gcj_bd_d, bd_gcj_d);
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> bd_wgs_bored = __bored__(wgs_bd, bd_wgs);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> GCJ02_WGS84_bored = __bored__(WGS84_GCJ02, GCJ02_WGS84);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_GCJ02_bored = __bored__(gcj_bd_d, bd_gcj_d);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_WGS84_bored = __bored__(WGS84_BD09, BD09_WGS84);
 
         private static bool sanity_in_china_p((double lat, double lon) coords)
         {
