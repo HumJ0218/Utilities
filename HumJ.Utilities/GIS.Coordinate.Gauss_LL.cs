@@ -71,8 +71,8 @@ namespace HumJ.Utilities
             latitude1 = fai - (NN * Math.Tan(fai) / R) * (D * D / 2 - (5 + 3 * T + 10 * C - 4 * C * C - 9 * ee) * D * D * D * D / 24 + (61 + 90 * T + 298 * C + 45 * T * T - 256 * ee - 3 * C * C) * D * D * D * D * D * D / 720);
 
             // 转换为度 DD
-            var lon = longitude1 / iPI;
-            var lat = latitude1 / iPI;
+            double lon = longitude1 / iPI;
+            double lat = latitude1 / iPI;
 
             return (lat, lon);
         }
@@ -155,8 +155,8 @@ namespace HumJ.Utilities
             Y0 = 0;
             xval += X0; yval += Y0;
 
-            var x = xval;
-            var y = yval;
+            double x = xval;
+            double y = yval;
 
             return (x, y);
         }
