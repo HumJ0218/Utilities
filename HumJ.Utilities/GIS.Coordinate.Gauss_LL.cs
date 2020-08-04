@@ -7,9 +7,6 @@ namespace HumJ.Utilities
 {
     public static partial class GIS
     {
-        /// <summary>
-        /// 高斯投影转经纬度
-        /// </summary>
         public static (double lat, double lon) Gauss_LL((double x, double y) gauss, Coordinate coordinate, int zoneWide = 6)
         {
             (double x, double y) = (gauss.x, gauss.y);
@@ -71,10 +68,6 @@ namespace HumJ.Utilities
             return (lat, lon);
         }
 
-
-        /// <summary>
-        /// 经纬度转高斯投影
-        /// </summary>
         public static (double x, double y) LL_Gauss((double lat, double lon) ll, Coordinate coordinate, int zoneWide = 6)
         {
             (double lat, double lon) = (ll.lat, ll.lon);
@@ -109,7 +102,7 @@ namespace HumJ.Utilities
 
             longitude0 = ProjNo * zoneWide + zoneWide / 2; // 中央子午线
 
-            longitude0 *= iPI;                   // 中央子午线转换为弧度
+            longitude0 *= iPI; // 中央子午线转换为弧度
 
             longitude1 = lon * iPI; // 经度转换为弧度
             latitude1 = lat * iPI; // 纬度转换为弧度
