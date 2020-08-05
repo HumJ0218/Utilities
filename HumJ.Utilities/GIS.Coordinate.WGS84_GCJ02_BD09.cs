@@ -40,6 +40,8 @@
  */
 
 using System;
+using System.Diagnostics;
+using static System.Math;
 
 namespace HumJ.Utilities
 {
@@ -70,24 +72,24 @@ namespace HumJ.Utilities
         {
             Func<double, double> hav = new Func<double, double>((double θ) =>
             {
-                return Math.Pow(Math.Sin(θ / 2), 2);
+                return Pow(Sin(θ / 2), 2);
             });
 
-            (double lat, double lon) Δ = _coord_diff(a, b);
+            (double lat, double lon) = CoordDiff(a, b);
 
-            return 2 * EARTH_R * Math.Asin(Math.Sqrt(
-                hav(Δ.lat * Math.PI / 180) +
-                    Math.Cos(a.lat * Math.PI / 180) *
-                    Math.Cos(b.lat * Math.PI / 180) *
-                    hav(Δ.lon * Math.PI / 180)
+            return 2 * EARTH_R * Asin(Sqrt(
+                hav(lat * PI / 180) +
+                    Cos(a.lat * PI / 180) *
+                    Cos(b.lat * PI / 180) *
+                    hav(lon * PI / 180)
             ));
         }
 
         public static (double lat, double lon) WGS84_GCJ02((double lat, double lon) wgs, bool checkChina = true)
         {
-            if (checkChina && !sanity_in_china_p(wgs))
+            if (checkChina && !SanityInChina_P(wgs))
             {
-                Console.WriteLine($"Non-Chinese coords found, returning as-is: {_stringify(wgs)}");
+                Debug.WriteLine($"Non-Chinese coords found, returning as-is: {wgs}");
                 return wgs;
             }
 
@@ -102,16 +104,16 @@ namespace HumJ.Utilities
             //
             // For example, at the (mapped) center of China (105E, 35N), you get a
             // default deviation of <300, -100> meters.
-            double dLat_m = -100 + 2 * x + 3 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.Sqrt(Math.Abs(x)) + (2 * Math.Sin(x * 6 * Math.PI) + 2 * Math.Sin(x * 2 * Math.PI) + 2 * Math.Sin(y * Math.PI) + 4 * Math.Sin(y / 3 * Math.PI) + 16 * Math.Sin(y / 12 * Math.PI) + 32 * Math.Sin(y / 30 * Math.PI)) * 20 / 3;
-            double dLon_m = 300 + x + 2 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.Sqrt(Math.Abs(x)) + (2 * Math.Sin(x * 6 * Math.PI) + 2 * Math.Sin(x * 2 * Math.PI) + 2 * Math.Sin(x * Math.PI) + 4 * Math.Sin(x / 3 * Math.PI) + 15 * Math.Sin(x / 12 * Math.PI) + 30 * Math.Sin(x / 30 * Math.PI)) * 20 / 3;
+            double dLat_m = -100 + 2 * x + 3 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Sqrt(Abs(x)) + (2 * Sin(x * 6 * PI) + 2 * Sin(x * 2 * PI) + 2 * Sin(y * PI) + 4 * Sin(y / 3 * PI) + 16 * Sin(y / 12 * PI) + 32 * Sin(y / 30 * PI)) * 20 / 3;
+            double dLon_m = 300 + x + 2 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Sqrt(Abs(x)) + (2 * Sin(x * 6 * PI) + 2 * Sin(x * 2 * PI) + 2 * Sin(x * PI) + 4 * Sin(x / 3 * PI) + 15 * Sin(x / 12 * PI) + 30 * Sin(x / 30 * PI)) * 20 / 3;
 
-            double radLat = wgs.lat / 180 * Math.PI;
-            double magic = 1 - GCJ_EE * Math.Pow(Math.Sin(radLat), 2); // just a common expr
+            double radLat = wgs.lat / 180 * PI;
+            double magic = 1 - GCJ_EE * Pow(Sin(radLat), 2); // just a common expr
 
             // [[:en:Latitude#Length_of_a_degree_of_latitude]]
-            double lat_deg_arclen = (Math.PI / 180) * (GCJ_A * (1 - GCJ_EE)) / Math.Pow(magic, 1.5);
+            double lat_deg_arclen = (PI / 180) * (GCJ_A * (1 - GCJ_EE)) / Pow(magic, 1.5);
             // [[:en:Longitude#Length_of_a_degree_of_longitude]]
-            double lon_deg_arclen = (Math.PI / 180) * (GCJ_A * Math.Cos(radLat) / Math.Sqrt(magic));
+            double lon_deg_arclen = (PI / 180) * (GCJ_A * Cos(radLat) / Sqrt(magic));
 
             // The screwers pack their deviations into degrees and disappear.
             // Note how they are mixing WGS-84 and Krasovsky 1940 ellipsoids here...
@@ -121,19 +123,19 @@ namespace HumJ.Utilities
         // rev_transform_rough; accuracy ~2e-6 deg (meter-level)
         public static (double lat, double lon) GCJ02_WGS84((double lat, double lon) gcj, bool checkChina = true)
         {
-            return _coord_diff(gcj, _coord_diff(WGS84_GCJ02(gcj, checkChina), gcj));
+            return CoordDiff(gcj, CoordDiff(WGS84_GCJ02(gcj, checkChina), gcj));
         }
 
         public static (double lat, double lon) GCJ02_BD09((double lat, double lon) gcj)
         {
-            return gcj_bd_d(gcj);
+            return GCJ_BD_D(gcj);
         }
 
         // Yes, we can implement a "precise" one too.
         // accuracy ~1e-7 deg (decimeter-level; exceeds usual data accuracy)
         public static (double lat, double lon) BD09_GCJ02((double lat, double lon) bd)
         {
-            return bd_gcj_d(bd);
+            return BD_GCJ_D(bd);
         }
 
         public static (double lat, double lon) BD09_WGS84((double lat, double lon) bd, bool checkChina = true)
@@ -148,7 +150,7 @@ namespace HumJ.Utilities
 
         // generic "bored function" factory, Caijun 2014
         // gcj: 4 calls to wgs_gcj; ~0.1mm acc
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> __bored__(Func<(double lat, double lon), bool, (double lat, double lon)> fwd, Func<(double lat, double lon), bool, (double lat, double lon)> rev)
+        private static Func<(double lat, double lon), bool, (double lat, double lon)> Bored(Func<(double lat, double lon), bool, (double lat, double lon)> fwd, Func<(double lat, double lon), bool, (double lat, double lon)> rev)
         {
             return new Func<(double lat, double lon), bool, (double lat, double lon)>(((double lat, double lon) heck, bool checkChina) =>
             {
@@ -158,10 +160,10 @@ namespace HumJ.Utilities
                 // Wait till we hit fixed point or get bored
                 int i = 0;
 
-                while (Math.Max(Math.Abs(diff.lat), Math.Abs(diff.lon)) > PRC_EPS && i++ < 10)
+                while (Max(Abs(diff.lat), Abs(diff.lon)) > PRC_EPS && i++ < 10)
                 {
-                    diff = _coord_diff(fwd(curr, checkChina), heck);
-                    curr = _coord_diff(curr, diff);
+                    diff = CoordDiff(fwd(curr, checkChina), heck);
+                    curr = CoordDiff(curr, diff);
                 }
 
                 return curr;
@@ -174,50 +176,45 @@ namespace HumJ.Utilities
         // original GCJ implementation contains noise from a linear-modulo PRNG,
         // and Baidu seems to do similar things with their API too.
 
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> GCJ02_WGS84_bored = __bored__(WGS84_GCJ02, GCJ02_WGS84);
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_GCJ02_bored = __bored__(gcj_bd_d, bd_gcj_d);
-        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_WGS84_bored = __bored__(WGS84_BD09, BD09_WGS84);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> GCJ02_WGS84_bored = Bored(WGS84_GCJ02, GCJ02_WGS84);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_GCJ02_bored = Bored(GCJ_BD_D, BD_GCJ_D);
+        public static Func<(double lat, double lon), bool, (double lat, double lon)> BD09_WGS84_bored = Bored(WGS84_BD09, BD09_WGS84);
 
-        private static bool sanity_in_china_p((double lat, double lon) coords)
+        private static bool SanityInChina_P((double lat, double lon) coords)
         {
             return coords.lat >= 0.8293 && coords.lat <= 55.8271 && coords.lon >= 72.004 && coords.lon <= 137.8347;
         }
 
-        private static (double lat, double lon) _coord_diff((double lat, double lon) a, (double lat, double lon) b)
+        private static (double lat, double lon) CoordDiff((double lat, double lon) a, (double lat, double lon) b)
         {
             return (lat: a.lat - b.lat, lon: a.lon - b.lon);
         }
 
-        private static string _stringify((double lat, double lon) c)
-        {
-            return $"({c.lat}, {c.lon})";
-        }
-
-        private static (double lat, double lon) gcj_bd_d((double lat, double lon) gcj, bool dummyArgument = true)
+        private static (double lat, double lon) GCJ_BD_D((double lat, double lon) gcj, bool dummyArgument = true)
         {
             double x = gcj.lon;
             double y = gcj.lat;
 
             // trivia: pycoordtrans actually describes how these values are calculated
-            double r = Math.Sqrt(x * x + y * y) + 0.00002 * Math.Sin(y * Math.PI * 3000 / 180);
-            double θ = Math.Atan2(y, x) + 0.000003 * Math.Cos(x * Math.PI * 3000 / 180);
+            double r = Sqrt(x * x + y * y) + 0.00002 * Sin(y * PI * 3000 / 180);
+            double θ = Atan2(y, x) + 0.000003 * Cos(x * PI * 3000 / 180);
 
             // Hard-coded default deviations again!
-            return (lat: r * Math.Sin(θ) + BD_DLAT, lon: r * Math.Cos(θ) + BD_DLON);
+            return (lat: r * Sin(θ) + BD_DLAT, lon: r * Cos(θ) + BD_DLON);
         }
 
         // Yes, we can implement a "precise" one too.
         // accuracy ~1e-7 deg (decimeter-level; exceeds usual data accuracy)
-        private static (double lat, double lon) bd_gcj_d((double lat, double lon) bd, bool dummyArgument = true)
+        private static (double lat, double lon) BD_GCJ_D((double lat, double lon) bd, bool dummyArgument = true)
         {
             double x = bd.lon - BD_DLON;
             double y = bd.lat - BD_DLAT;
 
             // trivia: pycoordtrans actually describes how these values are calculated
-            double r = Math.Sqrt(x * x + y * y) - 0.00002 * Math.Sin(y * Math.PI * 3000 / 180);
-            double θ = Math.Atan2(y, x) - 0.000003 * Math.Cos(x * Math.PI * 3000 / 180);
+            double r = Sqrt(x * x + y * y) - 0.00002 * Sin(y * PI * 3000 / 180);
+            double θ = Atan2(y, x) - 0.000003 * Cos(x * PI * 3000 / 180);
 
-            return (lat: r * Math.Sin(θ), lon: r * Math.Cos(θ));
+            return (lat: r * Sin(θ), lon: r * Cos(θ));
         }
     }
 }
