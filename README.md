@@ -21,7 +21,7 @@
 - `string.ConvertToExcelColumnNumber` 列序号字符串转数字
 
 # GIS
-- …… 坐标系变换 从略
+- …… 坐标系和投影方法变换 从略
 - `(double, double).GetGisTileXY` 获取指定经纬度对应的地图瓦片序号
 
 # 图形
