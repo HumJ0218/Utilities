@@ -15,29 +15,7 @@ namespace HumJ.Utilities
             double longitude1, latitude1, longitude0, X0, Y0, xval, yval;
             double e1, e2, f, a, ee, NN, T, C, M, D, R, u, fai, iPI = Math.PI / 180.0;
 
-            switch (coordinate)
-            {
-                case Coordinate.BJ54:
-                    {
-                        a = 6378245.0; f = 1.0 / 298.3; // 54年北京坐标系参数 
-
-                        break;
-                    }
-                case Coordinate.WGS84:
-                    {
-                        a = 6378137.0; f = 1 / 298.257223563; // WGS84
-                        break;
-                    }
-                case Coordinate.XA80:
-                    {
-                        a = 6378140.0; f = 1 / 298.257; // 80年西安坐标系参数 
-                        break;
-                    }
-                default:
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(coordinate));
-                    }
-            }
+            (a, f) = CoordinateArguments[coordinate];
 
             ProjNo = (int)(x / 1000000L); // 查找带号
             longitude0 = (ProjNo - 1) * zoneWide + zoneWide / 2;
@@ -75,28 +53,7 @@ namespace HumJ.Utilities
             double longitude1, latitude1, longitude0, X0, Y0, xval, yval;
             double a, f, e2, ee, NN, T, C, A, M, iPI = Math.PI / 180.0;
 
-            switch (coordinate)
-            {
-                case Coordinate.BJ54:
-                    {
-                        a = 6378245.0; f = 1.0 / 298.3; // 54年北京坐标系参数 
-                        break;
-                    }
-                case Coordinate.WGS84:
-                    {
-                        a = 6378137.0; f = 1 / 298.257223563; // WGS84
-                        break;
-                    }
-                case Coordinate.XA80:
-                    {
-                        a = 6378140.0; f = 1 / 298.257; // 80年西安坐标系参数 
-                        break;
-                    }
-                default:
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(coordinate));
-                    }
-            }
+            (a, f) = CoordinateArguments[coordinate];
 
             int ProjNo = (int)(lon / zoneWide);
 
@@ -141,12 +98,5 @@ namespace HumJ.Utilities
 
             return (x, y);
         }
-
-        public enum Coordinate
-        {
-            BJ54,
-            WGS84,
-            XA80
-        };
     }
 }
