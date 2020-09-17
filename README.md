@@ -50,3 +50,6 @@
 - `Stream.GetMD5Hash` 计算字节流的 MD5
 - `string.GetMD5Hash` 计算字符串的 MD5
 - `FileInfo.GetMD5Hash` 计算文件的 MD5
+
+# GLB 文件
+- `GlbFileReader` GLB 文件解包
