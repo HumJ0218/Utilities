@@ -6,14 +6,14 @@ using System.Text;
 
 namespace HumJ.Utilities
 {
-    public class GlbFileReader
+    public class GameLibraryBundleFileReader
     {
         public string Metadata { get; }
         public int ItemCount { get; }
         public IEnumerable<(int StartOffset, int Length, string Title)> Index { get; }
         public IEnumerable<(string Title, byte[] Bytes)> Item { get; }
 
-        public GlbFileReader(string path)
+        public GameLibraryBundleFileReader(string path)
         {
             using Stream fs = File.OpenRead(path);
             using BinaryReader br = new BinaryReader(fs);
