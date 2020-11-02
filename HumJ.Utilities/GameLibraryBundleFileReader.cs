@@ -109,6 +109,7 @@ namespace HumJ.Utilities
                 return Value.ToString();
             }
         }
+
         public sealed class Int32Chunk : DataChunk<int>
         {
             internal Int32Chunk()
@@ -124,6 +125,7 @@ namespace HumJ.Utilities
             }
 
         }
+
         public sealed class ByteArrayChunk : DataChunk<byte[]>
         {
 
